@@ -67,7 +67,7 @@ enum temperature_units
 
 // definitions for pressure reading commands with accuracy modes
 #define MODE_LOW		0x00
-#define MODE_STANDARD	0x01
+#define MODE_STANDARD	        0x01
 #define MODE_HIGH		0x10
 #define MODE_ULTRA		0x11
 

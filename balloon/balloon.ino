@@ -1,13 +1,15 @@
 #include "Wire.h"
 #include "ml8511.h"
 #include "t5403.h"
+#include "adxl335.h"
 
 T5403 barometer (MODE_I2C);
 double barometertemp, absolutepressure, baselinepressure, deltaaltitude, absolutealtitude;
+const double basealtitude = 270.0; // need to get more accurate altitude value at launch site
 
 ML8511 uvsensor (A0, A1);
 
-double basealtitude = 270.0; // need to get more accurate altitude value at launch site
+ADXL335 accelerometer (A3, A4, A5);
 
 void setup() {
   Serial.begin(9600);
@@ -41,7 +43,7 @@ void loop() {
   Serial.println(absolutealtitude);
 }
 
-double altitude(double P, double P0) // Via SparkFun example implementation
+double altitude(double P, double P0) // Via SparkFun example implementation, since magic numbers are magical
 // Given a pressure measurement P (Pa) and the pressure at a baseline P0 (Pa),
 // return altitude (meters) above baseline.
 {
