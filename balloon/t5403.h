@@ -32,6 +32,7 @@ Distributed as-is; no warranty is given.
 
 #include "Arduino.h"
 
+<<<<<<< HEAD
 // The T5403 is designed to function over both I2C or SPI. This library supports
 // both. The interface mode used must be sent to the T5403 constructor. Use
 // one of these two as the first parameter of the constructor.
@@ -108,3 +109,11 @@ class T5403
 };
 
 #endif
+=======
+class T5403 {
+ public:
+  T5403(void);
+  void begin(void);
+  
+};
+>>>>>>> c34920461d227d032ad873e3e89f223cc863dff4
