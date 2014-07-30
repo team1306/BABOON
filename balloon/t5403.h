@@ -8,3 +8,4 @@ class T5403 {
   T5403(void);
   void begin(void);
   
+}
