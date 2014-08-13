@@ -5,11 +5,10 @@
 
 class ADXL335 {
  public:
-  ADXL335(uint8_t, uint8_t, uint8_t);
+  ADXL335(uint8_t xaxis, uint8_t yaxis, uint8_t zaxis);
   void begin(void);
-  /* haven't figured out reading yet
-  float readX(void);
-  */
+  float getrawaxis(char axis);
+  float readaxis(char axis);
  private:
   uint8_t x;
   uint8_t y;

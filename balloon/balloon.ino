@@ -9,21 +9,28 @@ const double basealtitude = 270.0; // need to get more accurate altitude value a
 
 ML8511 uvsensor (A0, A1);
 
-ADXL335 accelerometer (A3, A4, A5);
+// ADXL335 accelerometer (A3, A4, A5);
+// will need to give a way to normalize analog reads to Gs.
 
 void setup() {
   Serial.begin(9600);
+  Serial.println("serial works");
   uvsensor.begin();
+  Serial.println("UV Sensor Works");
   barometer.begin();
+  Serial.println("Barometer initialized");
   baselinepressure = barometer.getPressure(MODE_ULTRA);
+  Serial.println("baseline pressure established");
 }
 
-void loop() {
-  delay(500);
-  
-  // Barometer measurements
-  barometertemp = barometer.getTemperature(CELSIUS);
-  absolutepressure = barometer.getPressure(MODE_ULTRA); // should we split this off and do it less often?
+double pressuretoaltitude(double P) // Via SparkFun example implementation, since magic numbers are magical
+// Given a pressure measurement P (Pa) and the baseline pressure from setup, return altitude (in meters) above baseline.
+{
+	return(44330.0*(1-pow(P/baselinepressure,1/5.255)));
+}
+
+double getaltitude(void) {
+ absolutepressure = barometer.getPressure(MODE_ULTRA);
   /*
   MODE          Time
   
@@ -33,21 +40,23 @@ void loop() {
   MODE_ULTRA    67ms 
   */
   
-  deltaaltitude = altitude(absolutepressure, baselinepressure);
-  absolutealtitude = basealtitude + deltaaltitude;
+  deltaaltitude = pressuretoaltitude(absolutepressure);
+  absolutealtitude = basealtitude + deltaaltitude; 
+}
+
+
+void loop() {
+  delay(500);
   
-  //
+  // Barometer measurements
+  barometertemp = barometer.getTemperature(CELSIUS);
+  // altitude = getaltitude()
   
   //Data output
   Serial.println(uvsensor.read());
-  Serial.println(absolutealtitude);
+  Serial.println(getaltitude());
+//  Serial.print("X raw value: ");
+//  Serial.println(accelerometer.getrawaxis(A5));
+  
 }
-
-double altitude(double P, double P0) // Via SparkFun example implementation, since magic numbers are magical
-// Given a pressure measurement P (Pa) and the pressure at a baseline P0 (Pa),
-// return altitude (meters) above baseline.
-{
-	return(44330.0*(1-pow(P/P0,1/5.255)));
-}
-
 
