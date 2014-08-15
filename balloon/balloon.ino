@@ -4,8 +4,8 @@
 #include "adxl335.h"
 
 T5403 barometer (MODE_I2C);
-double barometertemp, absolutepressure, baselinepressure, deltaaltitude, absolutealtitude;
-const double basealtitude = 270.0; // need to get more accurate altitude value at launch site
+double barometerTemp, absolutePressure, baselinePressure, deltaAltitude, absoluteAltitude;
+const double baseAltitude = 270.0; // need to get more accurate altitude value at launch site
 
 ML8511 uvsensor (A0, A1);
 
@@ -19,18 +19,18 @@ void setup() {
   Serial.println("UV Sensor Works");
   barometer.begin();
   Serial.println("Barometer initialized");
-  baselinepressure = barometer.getPressure(MODE_ULTRA);
+  baselinePressure = barometer.getPressure(MODE_ULTRA);
   Serial.println("baseline pressure established");
 }
 
-double pressuretoaltitude(double P) // Via SparkFun example implementation, since magic numbers are magical
+double pressureToAltitude(double P) // Via SparkFun example implementation, since magic numbers are magical
 // Given a pressure measurement P (Pa) and the baseline pressure from setup, return altitude (in meters) above baseline.
 {
-	return(44330.0*(1-pow(P/baselinepressure,1/5.255)));
+	return(44330.0*(1-pow(P/baselinePressure,1/5.255)));
 }
 
-double getaltitude(void) {
- absolutepressure = barometer.getPressure(MODE_ULTRA);
+double getAltitude(void) {
+ absolutePressure = barometer.getPressure(MODE_ULTRA);
   /*
   MODE          Time
   
@@ -40,8 +40,8 @@ double getaltitude(void) {
   MODE_ULTRA    67ms 
   */
   
-  deltaaltitude = pressuretoaltitude(absolutepressure);
-  absolutealtitude = basealtitude + deltaaltitude; 
+  deltaAltitude = pressureToAltitude(absolutePressure);
+  absoluteAltitude = baseAltitude + deltaAltitude; 
 }
 
 
@@ -49,14 +49,14 @@ void loop() {
   delay(500);
   
   // Barometer measurements
-  barometertemp = barometer.getTemperature(CELSIUS);
-  // altitude = getaltitude()
+  barometerTemp = barometer.getTemperature(CELSIUS);
+  // altitude = getAltitude()
   
   //Data output
   Serial.println(uvsensor.read());
-  Serial.println(getaltitude());
+  Serial.println(getAltitude());
 //  Serial.print("X raw value: ");
-//  Serial.println(accelerometer.getrawaxis(A5));
+//  Serial.println(accelerometer.getRawAxis(A5));
   
 }
 
