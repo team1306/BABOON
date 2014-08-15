@@ -2,11 +2,17 @@
 #define adxl335_h
 
 #include "Arduino.h"
+#include "sensor.h"
 
-class ADXL335 {
+struct acceleration {
+  uint16_t x, y, z;
+};
+
+class ADXL335 : Sensor<void, acceleration>{
  public:
   ADXL335(uint8_t xaxis, uint8_t yaxis, uint8_t zaxis);
   void begin(void);
+  acceleration read(void);
   uint16_t getRawAxis(uint8_t axis);
   uint16_t readAxis(uint8_t axis);
  private:

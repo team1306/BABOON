@@ -18,8 +18,10 @@ uint16_t ADXL335::getRawAxis(uint8_t axis) {
         return output;
 }
 
-uint16_t ADXL335::readAxis(uint8_t axis) { 
-        // The raw values won't give us Gs, which could be more useful.
-        uint16_t rawvalue = ADXL335::getRawAxis(axis);
-        // Is response linear across the entire range?
+acceleration ADXL335::read(void) {
+  acceleration data;
+  data.x = getRawAxis(x);
+  data.y = getRawAxis(y);
+  data.z = getRawAxis(z);
+  return data;
 }
