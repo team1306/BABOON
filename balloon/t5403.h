@@ -89,6 +89,8 @@ class T5403
 		float pressureToAltitude(int32_t);
 		// get absolute altitudes
 		float getAltitude(void);
+		// default read method
+		int32_t read(uint8_t);
 
 	private:
 		// Variable used to store interface selected for communication.
@@ -114,7 +116,7 @@ class T5403
 		int8_t getData(uint8_t location, int16_t* output);
 		int8_t sendCommand(uint8_t location, uint8_t command);
 		// set baseline pressure from reading
-		void setBaselines(void);
+		void setBaselines(float);
 
 };
 

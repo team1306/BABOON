@@ -85,6 +85,10 @@ int16_t T5403::getTemperature(temperature_units units)
 	}
 }
 
+int32_t T5403::read(uint8_t commanded_precision) {
+  return getPressure(commanded_precision);
+}
+
 int32_t T5403::getPressure(uint8_t commanded_precision)
 // Return a pressure reading.
 {
@@ -157,7 +161,7 @@ void T5403::setBaselines(float base) {
 float T5403::getAltitude(void) {
   int32_t absolutePressure = getPressure(MODE_ULTRA);
   float deltaAltitude = pressureToAltitude(absolutePressure);
-  return baseAltitude + deltaAltitude;
+  return baselineAltitude + deltaAltitude;
 }
 
 void T5403::sensorWait(uint8_t time)
