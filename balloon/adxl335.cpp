@@ -13,12 +13,12 @@ void ADXL335::begin(void) {
 	pinMode(z, INPUT);
 }
  
-float ADXL335::getrawaxis(char axis) {
+uint16_t ADXL335::getrawaxis(uint8_t axis) {
         uint16_t output = analogRead(axis);
         return output;
 }
 
-float ADXL335::readaxis(char axis) { 
+uint16_t ADXL335::readaxis(char axis) { 
         // The raw values won't give us Gs, which could be more useful.
         uint16_t rawvalue = ADXL335::getrawaxis(axis);
         // Is response linear across the entire range?
