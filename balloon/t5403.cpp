@@ -52,7 +52,7 @@ void T5403::begin(float base)
 	getData(T5403_C8, &c8);  //Retrieve C8 from device
 
 	// Set baseline pressure
-	setBaselines();
+	setBaselines(base);
 }
 	
 int16_t T5403::getTemperature(temperature_units units)
@@ -149,9 +149,9 @@ float T5403::pressureToAltitude(int32_t absolutePressure) {
 	return(44330.0*(1-pow(absolutePressure/baselinePressure,1/5.255)));
 }
 
-void T5403::setBaselines(void) {
+void T5403::setBaselines(float base) {
   baselinePressure = getPressure(MODE_ULTRA);
-  baselineAltitude = pressureToAltitude(baselinePressure);
+  baselineAltitude = base;
 }
 
 float T5403::getAltitude(void) {

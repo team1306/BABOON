@@ -80,13 +80,15 @@ class T5403
 		// Select the interface to be used in communication
 		T5403(interface_mode interface);
 		// Collect constants from sensor for calculations
-		void begin(void);
+		void begin(float);
 		// Return calculated temperature from sensor
 		int16_t getTemperature(temperature_units units);
 		// Return calculated pressure from sensor
 		int32_t getPressure(uint8_t precision);
 		// convert pressure reading to altitude
-		double pressureToAltitude(int32_t);
+		float pressureToAltitude(int32_t);
+		// get absolute altitudes
+		float getAltitude(void);
 
 	private:
 		// Variable used to store interface selected for communication.
@@ -112,7 +114,7 @@ class T5403
 		int8_t getData(uint8_t location, int16_t* output);
 		int8_t sendCommand(uint8_t location, uint8_t command);
 		// set baseline pressure from reading
-		void setBaselinePressure(void);
+		void setBaselines(void);
 
 };
 
