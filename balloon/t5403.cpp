@@ -50,6 +50,9 @@ void T5403::begin(void)
 	getData(T5403_C6, &c6);  //Retrieve C6 from device
 	getData(T5403_C7, &c7);  //Retrieve C7 from device
 	getData(T5403_C8, &c8);  //Retrieve C8 from device
+
+	// Set baseline pressure
+	baselinePressure = getPressure(MODE_ULTRA);
 }
 	
 int16_t T5403::getTemperature(temperature_units units)
@@ -140,6 +143,14 @@ int32_t T5403::getPressure(uint8_t commanded_precision)
 	pressure_actual = (s * pressure_raw + o) >> 14;
 
 	return pressure_actual;
+}
+
+void T5403::setBaselinePressure(void) {
+  baselinePressure = getPressure(MODE_ULTRA);
+}
+
+double T5403::pressureToAltitude(int32_t absolutePressure) {
+	return(44330.0*(1-pow(absolutePressure/baselinePressure,1/5.255)));
 }
 
 void T5403::sensorWait(uint8_t time)

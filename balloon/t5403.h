@@ -85,6 +85,8 @@ class T5403
 		int16_t getTemperature(temperature_units units);
 		// Return calculated pressure from sensor
 		int32_t getPressure(uint8_t precision);
+		// convert pressure reading to altitude
+		double pressureToAltitude(int32_t);
 
 	private:
 		// Variable used to store interface selected for communication.
@@ -93,6 +95,9 @@ class T5403
 		// Constants filled in with T5403();
 		uint16_t c1, c2, c3, c4;		
 		int16_t c5, c6, c7, c8;
+
+		// baseline pressure
+		int32_t baselinePressure;
 		
 		// General delay function.  If delay() is not supported on other 
 		// platforms it may be necessary to modify this function.
@@ -104,6 +109,8 @@ class T5403
 		void communicationBegin();
 		int8_t getData(uint8_t location, int16_t* output);
 		int8_t sendCommand(uint8_t location, uint8_t command);
+		// set baseline pressure from reading
+		void setBaselinePressure(void);
 
 };
 
