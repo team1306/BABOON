@@ -20,6 +20,6 @@ uint16_t ADXL335::getRawAxis(uint8_t axis) {
 
 uint16_t ADXL335::readAxis(uint8_t axis) { 
         // The raw values won't give us Gs, which could be more useful.
-        uint16_t rawvalue = ADXL335::getrawaxis(axis);
+        uint16_t rawvalue = ADXL335::getRawAxis(axis);
         // Is response linear across the entire range?
 }
