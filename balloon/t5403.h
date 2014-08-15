@@ -98,6 +98,8 @@ class T5403
 
 		// baseline pressure
 		int32_t baselinePressure;
+		// baseline altitude
+		float baselineAltitude;
 		
 		// General delay function.  If delay() is not supported on other 
 		// platforms it may be necessary to modify this function.

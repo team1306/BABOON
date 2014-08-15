@@ -36,7 +36,7 @@ T5403::T5403(interface_mode interface)
 	_interface = interface; //set interface used for communication
 }
 
-void T5403::begin(void)
+void T5403::begin(float base)
 // Initialize library for subsequent pressure measurements
 {  
 	// Set up the communication port
@@ -52,7 +52,7 @@ void T5403::begin(void)
 	getData(T5403_C8, &c8);  //Retrieve C8 from device
 
 	// Set baseline pressure
-	baselinePressure = getPressure(MODE_ULTRA);
+	setBaselines();
 }
 	
 int16_t T5403::getTemperature(temperature_units units)
@@ -145,12 +145,19 @@ int32_t T5403::getPressure(uint8_t commanded_precision)
 	return pressure_actual;
 }
 
-void T5403::setBaselinePressure(void) {
-  baselinePressure = getPressure(MODE_ULTRA);
+float T5403::pressureToAltitude(int32_t absolutePressure) {
+	return(44330.0*(1-pow(absolutePressure/baselinePressure,1/5.255)));
 }
 
-double T5403::pressureToAltitude(int32_t absolutePressure) {
-	return(44330.0*(1-pow(absolutePressure/baselinePressure,1/5.255)));
+void T5403::setBaselines(void) {
+  baselinePressure = getPressure(MODE_ULTRA);
+  baselineAltitude = pressureToAltitude(baselinePressure);
+}
+
+float T5403::getAltitude(void) {
+  int32_t absolutePressure = getPressure(MODE_ULTRA);
+  float deltaAltitude = pressureToAltitude(absolutePressure);
+  return baseAltitude + deltaAltitude;
 }
 
 void T5403::sensorWait(uint8_t time)
