@@ -31,6 +31,7 @@ Distributed as-is; no warranty is given.
 #define t5403_h
 
 #include "Arduino.h"
+#include "sensor.h"
 
 // The T5403 is designed to function over both I2C or SPI. This library supports
 // both. The interface mode used must be sent to the T5403 constructor. Use
@@ -74,7 +75,7 @@ enum temperature_units
 // definition for temperature reading command
 #define COMMAND_GET_TEMP	0x03
 
-class T5403
+class T5403 : public Sensor<float, int32_t>
 {
 	public:
 		// Select the interface to be used in communication

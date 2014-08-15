@@ -2,8 +2,9 @@
 #define ml8511_h
 
 #include "Arduino.h"
+#include "sensor.h"
 
-class ML8511 {
+class ML8511 : public Sensor<void, float> {
  public:
   ML8511(uint8_t, uint8_t);
   void begin(void);
