@@ -90,7 +90,7 @@ class T5403
 		// get absolute altitudes
 		float getAltitude(void);
 		// default read method
-		int32_t read(uint8_t);
+		int32_t read(void);
 
 	private:
 		// Variable used to store interface selected for communication.

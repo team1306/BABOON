@@ -85,8 +85,8 @@ int16_t T5403::getTemperature(temperature_units units)
 	}
 }
 
-int32_t T5403::read(uint8_t commanded_precision) {
-  return getPressure(commanded_precision);
+int32_t T5403::read(void) {
+  return getPressure(MODE_ULTRA);
 }
 
 int32_t T5403::getPressure(uint8_t commanded_precision)
