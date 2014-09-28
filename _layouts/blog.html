@@ -42,14 +42,14 @@
       <div class="row">
 
         <div class="col-sm-8 blog-main">
- {% for post in site.posts %}
+
           <div class="blog-post">
             <h2 class="blog-post-title">{{post.title}}</h2>
             <p class="blog-post-meta">{{ page.date | date: "%B %e, %Y" }}</a></p>
 
               {{ content }}
           </div><!-- /.blog-post -->
-{% endfor %}
+
         </div><!-- /.blog-main -->
 
         <div class="col-sm-3 col-sm-offset-1 blog-sidebar">
