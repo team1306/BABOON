@@ -4,11 +4,12 @@
 #include "adxl335.h"
 
 T5403 barometer (MODE_I2C);
-ML8511 uvsensor (A0, A1);
-ADXL335 accelerometer (A3, A4, A5);
+ML8511 uvsensor (A0);
+ADXL335 accelerometer (A0, A1, A2);
 
 void setup() {
   Serial.begin(9600);
+  Serial.print("\n\n\n");
   Serial.println("Serial Initialized");
   uvsensor.begin();
   Serial.println("UV Sensor Initialized");
@@ -18,10 +19,9 @@ void setup() {
   Serial.println("Accelerometer Initialized");
 }
 
-uint32_t lastTime;
-
 void loop() {
-  lastTime = millis();
+  Serial.print("DATA: ");
+  
   Serial.print(barometer.getAltitude());
   Serial.print(" | ");
   Serial.print(barometer.read());
@@ -35,8 +35,6 @@ void loop() {
   Serial.print(" | ");
   Serial.print(data.y);
   Serial.print(" | ");
-  Serial.println(data.z);
-
-  while(millis() - lastTime < 500) {} // better than delaying since this accounts for the time it took to perform the measurements
+  Serial.print(data.z);
+  Serial.print("\n");
 }
-
