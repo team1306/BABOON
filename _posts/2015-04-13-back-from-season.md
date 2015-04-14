@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 'Back from Season'
+title: Back from Season
 summary: 'We're back from build season!'
 ---
 
