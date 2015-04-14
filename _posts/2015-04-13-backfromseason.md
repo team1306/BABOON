@@ -1,10 +1,8 @@
 ---
 layout: post
-title: Back from Build Season 
+title: 'Back from Season'
 summary: 'We're back from build season!'
 ---
-
-# Back from Build Season
 
 After taking a long hiatus from this balloon project to work on the FIRST Robotics Competition [2015 challenge](http://www.usfirst.org/roboticsprograms/frc/2015-game) [^1], we're happy to announce that we are returning to work on the space balloon!
 
