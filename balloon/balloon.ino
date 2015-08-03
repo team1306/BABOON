@@ -2,6 +2,7 @@
 #include "ml8511.h"
 #include "t5403.h"
 #include "adxl335.h"
+#include "max6675.h"
 
 T5403 barometer (MODE_I2C);
 ML8511 uvsensor (A0);
@@ -21,12 +22,12 @@ void setup() {
 
 void loop() {
   Serial.print("DATA: ");
-  
+
   Serial.print(barometer.getAltitude());
   Serial.print(" | ");
   Serial.print(barometer.read());
   Serial.print(" || ");
-  
+
   Serial.print(uvsensor.read());
   Serial.print(" || ");
 
