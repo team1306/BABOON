@@ -8,7 +8,7 @@ struct acceleration {
   uint16_t x, y, z;
 };
 
-class ADXL335 : Sensor<void, acceleration>{
+class ADXL335 : Sensor<void, acceleration> {
  public:
   ADXL335(uint8_t xaxis, uint8_t yaxis, uint8_t zaxis);
   void begin(void);
