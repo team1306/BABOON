@@ -28,11 +28,12 @@ void setup() {
   Serial.println("Thermocouple Initialized");
   Serial.println();
 
-  Serial.print("altitude,pressure,uv,x-axis,y-axis,z-axis,temp,cutting");
+  Serial.print("time,altitude,pressure,uv,x-axis,y-axis,z-axis,temp,cutting");
 }
 
 void loop() {
-  Serial.print("DATA: ");
+  Serial.print(millis());
+  Serial.print(",");
 
   Serial.print(barometer.getAltitude());
   Serial.print(",");
