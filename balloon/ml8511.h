@@ -6,7 +6,7 @@
 
 class ML8511 : public Sensor<void, float> {
  public:
-  ML8511(uint8_t, uint8_t);
+  ML8511(uint8_t);
   void begin(void);
   float read(void);
  private:

@@ -5,7 +5,7 @@
 
 T5403 barometer (MODE_I2C);
 ML8511 uvsensor (A0);
-ADXL335 accelerometer (A0, A1, A2);
+ADXL335 accelerometer (A1, A2, A3);
 
 void setup() {
   Serial.begin(9600);
@@ -13,7 +13,7 @@ void setup() {
   Serial.println("Serial Initialized");
   uvsensor.begin();
   Serial.println("UV Sensor Initialized");
-  barometer.begin(270.0); // initialize barometer with altitude
+  barometer.begin(0.0); // initialize barometer with altitude
   Serial.println("Barometer Initialized");
   accelerometer.begin();
   Serial.println("Accelerometer Initialized");
